@@ -2,10 +2,12 @@ import react, { useEffect, useRef, useState } from 'react'
 import {queryStory,respondStory,getStory,checkResponse,recordResponse,postEmotionStory,postAdvice,postComment,queryExerciseByEmotion} from './BackendProvider'
 import {Container,Row,Col,Button} from 'react-bootstrap'
 import bg from '../assets/images/bg.jpg'
-import {getEmojiByKey,RESP_EMOJI,getRandName} from './constants'
+import {getEmojiByKey,RESP_EMOJI, AVATAR_IMG, getRandName} from './constants'
 import { useHistory } from "react-router-dom";
 import refresh from "../assets/images/refresh_icon.gif";
 import paperplane from "../assets/images/paper_plane.gif";
+
+var randomColor = require('randomcolor');
 
 function PostCard(
     {post,onChange,isCounselor,changeCounselor}
@@ -19,6 +21,16 @@ function PostCard(
         }
         return post.children
     }
+
+    const avatarRender = (name) => {
+        for (var i = 0; i < AVATAR_IMG.length; i++) {
+            if (name.toLowerCase() == AVATAR_IMG[i].slice(14, -13)) {
+                return AVATAR_IMG[i];
+            }
+        }
+        return randomColor();
+    }
+
     const ref = useRef();
     let responses = post.responses || {};
     let keys = Object.keys(responses);
@@ -28,74 +40,129 @@ function PostCard(
         keys = keys.sort((a,b)=>responses[a]-responses[b]).reverse()
         num_responses = keys.map(e=>responses[e]).reduce((a,b)=>a+b)
     } 
-    return (
-        <Row div className="mood-post-card">
-            
-            <div className="mood-post-row-1">
-                <div className="mood-avatar"></div>
-                <span> Anonymous {post.author}</span></div>
-            <div className="mood-post-row-2">
-                {post.body}
-            </div>
-            <div className="mood-post-row-3">
-                
-                {keys.map(e=><div>{RESP_EMOJI[e]}</div>)}
-                
-                <div>  {num_responses} responses </div>
-                <div style={{flexGrow:1}}></div>
-                {!checkResponse(post.id)?<div className="respond-bar">
-                    {
-                        Object.entries(RESP_EMOJI).map(
-                            ([k,v])=><div className="respond-icon" onClick={
-                                ()=>respondStory(post.id,k).then(
-                                    e=>{
-                                        recordResponse(post.id)
-                                        onChange()
+    
+    let avatar = avatarRender(post.author);  
 
-                                    }
-                                )
-                            }>{v}</div>
-                        )
-                    }
-                    I feel you!</div>:""}
+    return (
+      <Row div className="mood-post-card">
+        <div className="mood-post-row-1">
+          <div
+            className="mood-avatar"
+            style={{
+              backgroundImage: `url('${avatar}')`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              backgroundColor: avatar,
+            }}
+          ></div>
+          <span> Anonymous {post.author}</span>
+        </div>
+        <div className="mood-post-row-2">{post.body}</div>
+        <div className="mood-post-row-3">
+          {keys.map((e) => (
+            <div>{RESP_EMOJI[e]}</div>
+          ))}
+
+          <div> {num_responses} responses </div>
+          <div style={{ flexGrow: 1 }}></div>
+          {!checkResponse(post.id) ? (
+            <div className="respond-bar">
+              {Object.entries(RESP_EMOJI).map(([k, v]) => (
+                <div
+                  className="respond-icon"
+                  onClick={() =>
+                    respondStory(post.id, k).then((e) => {
+                      recordResponse(post.id);
+                      onChange();
+                    })
+                  }
+                >
+                  {v}
                 </div>
-                <div className="mood-post-row-4">
-                    <input type="text" ref={ref} placeholder="Enter your comments" />
-                    <img className="comment-ico" src={paperplane} onClick={()=>{
-                        if(isCounselor){
-                            postAdvice("Counselor",ref.current.value,post.emotion,post.id).then(onChange);
-                        } else {
-                            postComment(name,ref.current.value,post.emotion,post.id).then(onChange);
-                        }
-                        
-                        }} />
-                </div>
-                <div className="mood-post-row-5">
-                   {!isCounselor?<div>Select Your display name {name} <img className="refresh-ico" onClick={()=>setName(getRandName())} src={refresh} />
-                   </div>:""}
-                   <span style={{flexGrow:1}}></span>
-                   <input type="checkbox" checked={isCounselor} onChange={()=>changeCounselor(!isCounselor)}/>
-                   <span>I'm a Counselor</span>
-                </div> 
-                <hr/>
-                {/* <div className="mood-post-row-6">
+              ))}
+              I feel you!
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="mood-post-row-4">
+          <input type="text" ref={ref} placeholder="Enter your comments" />
+          <img
+            className="comment-ico"
+            src={paperplane}
+            onClick={() => {
+              if (isCounselor) {
+                postAdvice(
+                  "Counselor",
+                  ref.current.value,
+                  post.emotion,
+                  post.id
+                ).then(onChange);
+              } else {
+                postComment(
+                  name,
+                  ref.current.value,
+                  post.emotion,
+                  post.id
+                ).then(onChange);
+              }
+            }}
+          />
+        </div>
+        <div className="mood-post-row-5">
+          {!isCounselor ? (
+            <div>
+              Select Your display name {name}{" "}
+              <img
+                className="refresh-ico"
+                onClick={() => setName(getRandName())}
+                src={refresh}
+              />
+            </div>
+          ) : (
+            ""
+          )}
+          <span style={{ flexGrow: 1 }}></span>
+          <input
+            type="checkbox"
+            checked={isCounselor}
+            onChange={() => changeCounselor(!isCounselor)}
+          />
+          <span>I'm a Counselor</span>
+        </div>
+        <hr />
+        {/* <div className="mood-post-row-6">
                  {JSON.stringify(getChildren())}
                 </div>  */}
-                <div className="mood-post-row-6">
-                 {getChildren().map(comment=><div>
-                    <div className="mood-post-row-1">
+        <div className="mood-post-row-6">
+          {getChildren().map((comment) => (
+            <div>
+              <div className="mood-post-row-1">
                 <div className="mood-avatar"></div>
-                <span>  {comment.type==2?comment.author:"Anonymous "+comment.author}</span> <span>: {comment.body}</span>
-                
-                </div>
-                 </div>)}
-                </div> 
-                {post.children.length>2?<div className="mood-post-collapse" onClick={()=>setExpand(!expand)}>
-                    {expand?"Collapse Comments":"More Comments"}
-                </div>:""}
-               
-        </Row>
-    )
+                <span>
+                  {" "}
+                  {comment.type == 2
+                    ? comment.author
+                    : "Anonymous " + comment.author}
+                </span>{" "}
+                <span>: {comment.body}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        {post.children.length > 2 ? (
+          <div
+            className="mood-post-collapse"
+            onClick={() => setExpand(!expand)}
+          >
+            {expand ? "Collapse Comments" : "More Comments"}
+          </div>
+        ) : (
+          ""
+        )}
+      </Row>
+    );
 
 }
 function MoodDetail ({match}) {

@@ -1,6 +1,6 @@
 import axios from 'axios'
-// const host = 'https://delta-trees-327003.wl.r.appspot.com/'
-const host = 'http://127.0.0.1:8000/'
+const host = 'https://delta-trees-327003.wl.r.appspot.com/'
+// const host = 'http://127.0.0.1:8000/'
 const getUrl = (url)=>host + url
 
 const queryStory = (emotion) => {
