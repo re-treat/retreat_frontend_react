@@ -17,7 +17,7 @@ function App() {
         <Route exact path="/join/" component={Register}></Route>
         <Route exact path="/home/" component={MoodBoard}></Route>
         <Route exact path="/mood/:emotion/" component={MoodDetail}></Route>
-        <Route path="/" exact component={Login} />
+        <Route path="/" component={Login} />
       </Switch>
     </div>
   );
