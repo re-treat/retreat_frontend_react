@@ -9,6 +9,7 @@ class Login extends React.Component {
   onFinish = async (values) => {
     if (values) {
       const { username, password } = values;
+      console.log(values);
     } else {
       console.log("Validation failed");
     }
@@ -45,6 +46,11 @@ class Login extends React.Component {
                       whitespace: true,
                       message: "Please input your email!",
                     },
+                    {
+                      pattern:
+                        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      message: "Please enter your email in form ...",
+                    },
                   ]}
                 >
                   <Input />
@@ -65,12 +71,12 @@ class Login extends React.Component {
                       message: "Please input your password!",
                     },
                     /* { min: 4, message: "Minimum 4 digits for password" },
-                    { max: 12, message: "Maximum 12 digits for password" },
+                    { max: 12, message: "Maximum 12 digits for password" }, */
                     {
                       pattern: /^[a-zA-Z0-9_]+$/,
                       message:
                         "Must be constituted of letters, numbers, or underline",
-                    }, */
+                    },
                   ]}
                 >
                   <Input type="password" />
