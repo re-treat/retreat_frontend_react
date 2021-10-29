@@ -33,7 +33,9 @@ class Login extends React.Component {
             <Form onFinish={this.onFinish} className="login-antd-form">
               {/* Email */}
               <div className="login-email">
-                <label htmlFor="email">Email</label>
+                <label className="required" htmlFor="email">
+                  Email
+                </label>
                 <Form.Item
                   name="email"
                   /* validation: required, 4-12 digits, letter&number&underline */
@@ -51,7 +53,9 @@ class Login extends React.Component {
 
               {/* Password */}
               <div className="login-password">
-                <label htmlFor="password">Password</label>
+                <label className="required" htmlFor="password">
+                  Password
+                </label>
                 <Form.Item
                   name="password"
                   rules={[

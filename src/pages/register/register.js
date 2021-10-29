@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
+import { QuestionCircleOutlined } from "@ant-design/icons";
 
 import Header from "../../components/header/header";
 
@@ -30,10 +31,16 @@ class Register extends React.Component {
           </h4>
 
           <div className="register-form">
-            <Form onFinish={this.onFinish} className="register-antd-form">
+            <Form
+              onFinish={this.onFinish}
+              layout="vertical"
+              className="register-antd-form"
+            >
               {/* Email */}
               <div className="register-email">
-                <label htmlFor="email">Email</label>
+                <label className="required" htmlFor="email">
+                  Email
+                </label>
                 <Form.Item
                   name="email"
                   /* validation: required, 4-12 digits, letter&number&underline */
@@ -56,7 +63,9 @@ class Register extends React.Component {
 
               {/* Password */}
               <div className="register-password">
-                <label htmlFor="password">Password</label>
+                <label className="required" htmlFor="password">
+                  Password
+                </label>
                 <Form.Item
                   name="password"
                   rules={[
@@ -80,7 +89,9 @@ class Register extends React.Component {
 
               {/* Repeat password */}
               <div className="register-repeat-pw">
-                <label htmlFor="repeat-pw">Repeat password</label>
+                <label className="required" htmlFor="repeat-pw">
+                  Repeat password
+                </label>
                 <Form.Item
                   name="repeat-pw"
                   rules={[
@@ -104,11 +115,14 @@ class Register extends React.Component {
 
               {/* Alias */}
               <div className="alias">
-                <label htmlFor="alias">Alias</label>
+                {/* <label htmlFor="alias">
+                  Alias
+                  <QuestionCircleOutlined className="alias-explain" />
+                </label> */}
                 <Form.Item
                   name="alias"
-                  required
-                  tooltip="An alias is displayed on your profile page replacing your real name. When you are posting, you can choose to show your alias or use a randomly generated name for anonymity,"
+                  label="Alias"
+                  tooltip="An alias is displayed on your profile page replacing your real name. When you are posting, you can choose to show your alias or use a randomly generated name for anonymity."
                 >
                   <Input />
                 </Form.Item>
@@ -142,7 +156,7 @@ class Register extends React.Component {
                 </div>
 
                 <div className="agree-right">
-                  <label htmlFor="agree" class="agreement-label">
+                  <label htmlFor="agree" class="agreement-label required">
                     Agree to the{" "}
                     <a className="agree-terms" href="">
                       Terms of Service
