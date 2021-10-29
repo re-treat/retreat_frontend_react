@@ -3,6 +3,7 @@
   height: 1300px;
   background-image: url("../../assets/images/bg.png");
   background-size: 100% 100%;
+  font-family: "Open Sans";
 
   .register-body {
     width: 475px;
@@ -55,34 +56,62 @@
         }
 
         .register-subscribe {
+          display: flex;
+          align-items: center;
           font-size: 18px;
           font-weight: normal;
 
-          .subscribe-checkbox {
-            margin-right: 14px;
+          .subscribe-left {
+            display: inline-block;
             width: 30px;
-            height: 30px;
-            background: #ffffff;
-            border: 3px solid #98aeca;
-            box-sizing: border-box;
-            border-radius: 10px;
+            margin-right: 19px;
+            .subscribe-checkbox {
+              vertical-align: middle;
+
+              margin-right: 14px;
+              width: 30px;
+              height: 30px;
+              background: #ffffff;
+              border: 3px solid #98aeca;
+              box-sizing: border-box;
+              border-radius: 10px;
+            }
+          }
+          .subscribe-right {
+            display: inline-block;
+            width: 426px;
+            label {
+              margin-bottom: 0px;
+            }
           }
         }
 
         .register-agree {
+          vertical-align: middle;
           font-size: 18px;
           font-weight: normal;
           line-height: 50px;
           margin-bottom: 28px;
 
-          .agree-checkbox {
-            margin-right: 14px;
+          .agree-left {
+            display: inline-block;
             width: 30px;
-            height: 30px;
-            background: #ffffff;
-            border: 3px solid #98aeca;
-            box-sizing: border-box;
-            border-radius: 10px;
+            margin-right: 19px;
+            .agree-checkbox {
+              vertical-align: middle;
+              margin-right: 14px;
+              width: 30px;
+              height: 30px;
+              background: #ffffff;
+              border: 3px solid #98aeca;
+              box-sizing: border-box;
+              border-radius: 10px;
+            }
+          }
+
+          .agree-right {
+            display: inline-block;
+            width: 426px;
           }
         }
 

@@ -116,34 +116,43 @@ class Register extends React.Component {
 
               {/* Subscribe button */}
               <div className="register-subscribe">
-                <Form.Item name="subscribe" valuePropName="checked" noStyle>
+                <div className="subscribe-left">
                   <input
                     type="checkbox"
                     name="subscribe"
                     className="subscribe-checkbox"
                   />
-                  <label htmlFor="subscribe">
+                </div>
+                <div className="subscribe-right">
+                  <label htmlFor="subscribe" class="subscribe-label">
                     Receive your monthly mood summary and mental health
                     newsletter
                   </label>
-                </Form.Item>
+                </div>
               </div>
 
               {/* Agree button */}
               <div className="register-agree">
-                <Form.Item name="agree" valuePropName="checked" noStyle>
+                <div className="agree-left">
                   <input
                     type="checkbox"
                     name="agree"
                     className="agree-checkbox"
                   />
-                  <label htmlFor="agree">
+                </div>
+
+                <div className="agree-right">
+                  <label htmlFor="agree" class="agreement-label">
                     Agree to the{" "}
                     <a className="agree-terms" href="">
-                      Terms of Service and Privacy Policy
+                      Terms of Service
+                    </a>{" "}
+                    and{" "}
+                    <a className="agree-terms" href="">
+                      Privacy Policy
                     </a>
                   </label>
-                </Form.Item>
+                </div>
               </div>
 
               {/* Signup button */}
@@ -158,17 +167,17 @@ class Register extends React.Component {
                   </Button>
                 </Form.Item>
               </div>
-            </Form>
 
-            {/* Jump to register */}
-            <div className="to-sign-in-wrap">
-              <span>
-                Have an account already?{" "}
-                <a className="to-sign-in" href="">
-                  Sign in
-                </a>
-              </span>
-            </div>
+              {/* Jump to register */}
+              <div className="to-sign-in-wrap">
+                <span>
+                  Have an account already?{" "}
+                  <a className="to-sign-in" href="">
+                    Sign in
+                  </a>
+                </span>
+              </div>
+            </Form>
           </div>
         </div>
       </div>

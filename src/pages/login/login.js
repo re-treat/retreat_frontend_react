@@ -43,11 +43,6 @@ class Login extends React.Component {
                       whitespace: true,
                       message: "Please input your email!",
                     },
-                    {
-                      pattern: /^[a-zA-Z0-9_]+$/,
-                      message:
-                        "Must be constituted of letters, numbers, or underline",
-                    },
                   ]}
                 >
                   <Input />
@@ -65,13 +60,13 @@ class Login extends React.Component {
                       whitespace: true,
                       message: "Please input your password!",
                     },
-                    { min: 4, message: "Minimum 4 digits for password" },
+                    /* { min: 4, message: "Minimum 4 digits for password" },
                     { max: 12, message: "Maximum 12 digits for password" },
                     {
                       pattern: /^[a-zA-Z0-9_]+$/,
                       message:
                         "Must be constituted of letters, numbers, or underline",
-                    },
+                    }, */
                   ]}
                 >
                   <Input type="password" />
@@ -80,20 +75,18 @@ class Login extends React.Component {
 
               {/* Remember button */}
               <div className="login-remember">
-                <Form.Item>
-                  <Form.Item name="remember" valuePropName="checked" noStyle>
-                    <input
-                      type="checkbox"
-                      name="remember"
-                      className="remember-checkbox"
-                    />
-                    <label htmlFor="remember">Remember me</label>
-                  </Form.Item>
+                <label class="remember-label">
+                  <input
+                    type="checkbox"
+                    name="remember"
+                    className="remember-checkbox"
+                  />
+                  Remember me
+                </label>
 
-                  <a className="login-form-forgot" href="">
-                    Forgot password?
-                  </a>
-                </Form.Item>
+                <a className="login-form-forgot" href="">
+                  Forgot password?
+                </a>
               </div>
 
               {/* Login button */}
