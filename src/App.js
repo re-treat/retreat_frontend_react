@@ -1,6 +1,7 @@
 // import './App.css';
 import Login from "./pages/login/login";
 import Register from "./pages/register/register";
+import Profile from "./pages/user-profile/userProfile";
 import MoodBoard from "./components/MoodBoard";
 import MoodDetail from "./components/MoodDetail";
 import { Switch, Route, Redirect } from "react-router-dom";
@@ -15,6 +16,7 @@ function App() {
       <Switch>
         <Route exact path="/login/" component={Login}></Route>
         <Route exact path="/join/" component={Register}></Route>
+        <Route exact path="/profile/" component={Profile}></Route>
         <Route exact path="/home/" component={MoodBoard}></Route>
         <Route exact path="/mood/:emotion/" component={MoodDetail}></Route>
         <Route path="/" component={Login} />

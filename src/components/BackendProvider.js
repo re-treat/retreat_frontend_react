@@ -63,6 +63,34 @@ const checkResponse = (id)=>{
     return responses.includes(id)
 }
 
+const register = (username,password,nickname)=>{
+    let url = getUrl(`user/register/`)
+    return axios.post(url,{username,password,nickname})
+}
+
+const login = (username,password)=>{
+    let url = getUrl(`user/login/`)
+    return axios.post(url,{username,password}).then(
+        (response)=>{
+            if(response?.data?.token) {
+                localStorage.setItem('loginToken',response?.data?.token)
+            }
+        }
+    )
+}
+
+const logout = ()=>{
+    localStorage.removeItem('loginToken')
+}
+const hasLoggedIn = ()=>{
+    return !! localStorage.getItem('loginToken')
+}
+
+const getUserInfo = ()=>{
+    let url = getUrl(`user/whoami/`)
+    return axios.get(url, {headers: {'Authorization': 'JWT ' + localStorage.getItem('loginToken')}})
+}
+
 
 export{
     queryStory,
@@ -74,6 +102,11 @@ export{
     queryExerciseByEmotion,
     getStory,
     checkResponse,
-    recordResponse
+    recordResponse,
+    register,
+    login,
+    getUserInfo,
+    logout,
+    hasLoggedIn
 };
 
