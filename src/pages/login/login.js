@@ -1,28 +1,32 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
-import { login, register,getUserInfo,logout,hasLoggedIn} from "../../components/BackendProvider";
+import {
+  login,
+  register,
+  getUserInfo,
+  logout,
+  hasLoggedIn,
+} from "../../components/BackendProvider";
 import Header from "../../components/header/header";
 
 import "../login/login.less";
 
 class Login extends React.Component {
   componentDidMount() {
-    if (hasLoggedIn()){
-      this.props.history.push('/profile')
+    if (hasLoggedIn()) {
+      this.props.history.push("/profile");
     }
   }
   onFinish = async (values) => {
     if (values) {
       const { email, password } = values;
-      login(email, password).then(
-        ()=>{
-          this.props.history.push('/profile')
-        }
-      ).catch(
-        err=>{
-          alert(err)
-        }
-      )
+      login(email, password)
+        .then(() => {
+          this.props.history.push("/profile");
+        })
+        .catch((err) => {
+          alert(err);
+        });
       console.log(values);
     } else {
       console.log("Validation failed");
@@ -131,11 +135,14 @@ class Login extends React.Component {
             <div className="to-register">
               <span>
                 Don't have an account yet?{" "}
-                <span className="create-account" onClick={
-                  ()=>{this.props.history.push('/join')}
-                }>
+                <a
+                  className="create-account"
+                  onClick={() => {
+                    this.props.history.push("/join");
+                  }}
+                >
                   Create an account
-                </span>
+                </a>
               </span>
             </div>
           </div>

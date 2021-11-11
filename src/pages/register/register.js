@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
-import { login, register,hasLoggedIn} from "../../components/BackendProvider";
-import { QuestionCircleOutlined } from "@ant-design/icons";
+import { login, register, hasLoggedIn } from "../../components/BackendProvider";
 
 import Header from "../../components/header/header";
 
@@ -9,31 +8,30 @@ import "../register/register.less";
 
 class Register extends React.Component {
   state = {
-    username : '',
-    password : '',
-    nickname : ''
-  }
-  componentDidMount (){
-    if (hasLoggedIn()){
-      this.props.history.push('/profile')
+    username: "",
+    password: "",
+    nickname: "",
+  };
+  componentDidMount() {
+    if (hasLoggedIn()) {
+      this.props.history.push("/profile");
     }
   }
   onFinish = async (values) => {
     if (values) {
-      const { username, password,alias } = values;
-      register(username,password,alias).then(
-        ()=>{alert("SUCCESS")
-        login(username, password).then(
-          ()=>{
-            this.props.history.push('/profile')
-          }
-        ).catch(
-          err=>{
-            alert(err)
-          }
-        )
-      }
-      ).catch(err=>alert(err?.message))
+      const { username, password, alias } = values;
+      register(username, password, alias)
+        .then(() => {
+          alert("SUCCESS");
+          login(username, password)
+            .then(() => {
+              this.props.history.push("/profile");
+            })
+            .catch((err) => {
+              alert(err);
+            });
+        })
+        .catch((err) => alert(err?.message));
     } else {
       console.log("Validation failed");
     }
@@ -75,13 +73,17 @@ class Register extends React.Component {
                       message: "Please input your email!",
                     },
                     {
-                      type: 'email',
-                      message:
-                        "Must be a valid email",
+                      type: "email",
+                      message: "Must be a valid email",
                     },
                   ]}
                 >
-                  <Input value={this.state.username} onChange={(e)=>this.setState({username:e.target.value})}/>
+                  <Input
+                    value={this.state.username}
+                    onChange={(e) =>
+                      this.setState({ username: e.target.value })
+                    }
+                  />
                 </Form.Item>
               </div>
 
@@ -107,8 +109,13 @@ class Register extends React.Component {
                     },
                   ]}
                 >
-                   <Input  type="password" value={this.state.password} onChange={(e)=>this.setState({password:e.target.value})}/>
-            
+                  <Input
+                    type="password"
+                    value={this.state.password}
+                    onChange={(e) =>
+                      this.setState({ password: e.target.value })
+                    }
+                  />
                 </Form.Item>
               </div>
 
@@ -149,8 +156,13 @@ class Register extends React.Component {
                   label="Alias"
                   tooltip="An alias is displayed on your profile page replacing your real name. When you are posting, you can choose to show your alias or use a randomly generated name for anonymity."
                 >
-                  <Input value={this.state.nickname} onChange={(e)=>this.setState({nickname:e.target.value})}/>
-</Form.Item>
+                  <Input
+                    value={this.state.nickname}
+                    onChange={(e) =>
+                      this.setState({ nickname: e.target.value })
+                    }
+                  />
+                </Form.Item>
               </div>
 
               {/* Subscribe button */}
