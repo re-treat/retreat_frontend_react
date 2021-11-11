@@ -23,6 +23,19 @@ import "../user-profile/userProfile.less";
 export default class Profile extends React.Component {
   state = {
     userinfo: {},
+    timeline: "week",
+  };
+
+  toggleTimeline = (e) => {
+    this.setState({ timeline: e.target.className });
+  };
+
+  slideTimeline = (e) => {
+    if (e.target.checked) {
+      this.setState({ timeline: "month" });
+    } else {
+      this.setState({ timeline: "week" });
+    }
   };
 
   componentDidMount() {
@@ -78,13 +91,42 @@ export default class Profile extends React.Component {
               <div className="card-head">
                 <p>Mood Tracker</p>
                 <div className="toggle-switch">
-                  <ToggleSlide />
+                  {/* <ToggleSlide /> */}
+                  <div className="toggleSlide">
+                    <div className="week-or-month">
+                      <a
+                        className="week"
+                        onClick={this.toggleTimeline}
+                        disabled={this.state.timeline === "week"}
+                      >
+                        Weekly
+                      </a>
+                      <span>/</span>
+                      <a
+                        className="month"
+                        onClick={this.toggleTimeline}
+                        disabled={this.state.timeline === "month"}
+                      >
+                        Monthly
+                      </a>
+                    </div>
+
+                    <label class="switch">
+                      <input
+                        type="checkbox"
+                        onClick={this.slideTimeline}
+                        checked={this.state.timeline === "month"}
+                      />
+                      <span class="slider round" />
+                    </label>
+                  </div>
                 </div>
                 <div className="card-body">
-                  <Switch>
-                    <Route path="/" component={WeeklyTracker} />
-                    <Route path="/monthly" component={MonthlyTracker} />
-                  </Switch>
+                  {this.state.timeline == "week" ? (
+                    <WeeklyTracker />
+                  ) : (
+                    <MonthlyTracker />
+                  )}
                 </div>
               </div>
             </div>
