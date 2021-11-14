@@ -1,14 +1,24 @@
 import React, { Component } from "react";
+
 import "./moodTracker";
+import "./weeklyTracker.less";
+import LineChart from "../charts/lineChart";
+import PieChart from "../charts/pieChart";
 
 export default class WeeklyTracker extends Component {
   render() {
     return (
-      <div className="weekly-tracker-wrapper">
+      <React.Fragment>
         <p>Weekly tracker</p>
-        <div className="mood-lineChart">Line chart</div>
-        <div className="mood-pieChar">Pie chart</div>
-      </div>
+        <div className="weekly-tracker-wrapper">
+          <div className="mood-lineChart">
+            <LineChart />
+          </div>
+          <div className="mood-pieChart">
+            <PieChart />
+          </div>
+        </div>
+      </React.Fragment>
     );
   }
 }

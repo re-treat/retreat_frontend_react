@@ -28,6 +28,7 @@ export default class Profile extends React.Component {
 
   toggleTimeline = (e) => {
     this.setState({ timeline: e.target.className });
+    console.log(this);
   };
 
   slideTimeline = (e) => {
@@ -67,7 +68,9 @@ export default class Profile extends React.Component {
         <div className="dashboard-wrapper">
           <div className="dashboard-head">
             <p>Hey {this.state.userinfo.nickname}!</p>
-            <SettingOutlined />
+            <a>
+              <SettingOutlined />
+            </a>
           </div>
 
           <div className="dashboard-cards">
@@ -75,16 +78,18 @@ export default class Profile extends React.Component {
             <div className="mood-journal card">
               <div className="card-head">
                 <p>Today's Mood</p>
-                <EditOutlined />
+                <a>
+                  <EditOutlined />
+                </a>
               </div>
               <div className="card-body">
                 <div className="mood-pic"></div>
-                <p className="mood-state">I'm happy today!</p>
-                <p className="mood-details">
+                <div className="mood-state">I'm happy today!</div>
+                <div className="mood-details">
                   I feel very happy today bc it’s Friday, and I’m done with
                   classes. My roomates and I are going to downtown and have
                   K-BBQ tonight!
-                </p>
+                </div>
               </div>
             </div>
             <div className="mood-tracker card">
@@ -92,42 +97,40 @@ export default class Profile extends React.Component {
                 <p>Mood Tracker</p>
                 <div className="toggle-switch">
                   {/* <ToggleSlide /> */}
-                  <div className="toggleSlide">
-                    <div className="week-or-month">
-                      <a
-                        className="week"
-                        onClick={this.toggleTimeline}
-                        disabled={this.state.timeline === "week"}
-                      >
-                        Weekly
-                      </a>
-                      <span>/</span>
-                      <a
-                        className="month"
-                        onClick={this.toggleTimeline}
-                        disabled={this.state.timeline === "month"}
-                      >
-                        Monthly
-                      </a>
-                    </div>
+                  <div className="week-or-month">
+                    <a
+                      className="week"
+                      onClick={this.toggleTimeline}
+                      disabled={this.state.timeline === "week"}
+                    >
+                      Weekly
+                    </a>
+                    <span>/</span>
+                    <a
+                      className="month"
+                      onClick={this.toggleTimeline}
+                      disabled={this.state.timeline === "month"}
+                    >
+                      Monthly
+                    </a>
+                  </div>
 
-                    <label class="switch">
-                      <input
-                        type="checkbox"
-                        onClick={this.slideTimeline}
-                        checked={this.state.timeline === "month"}
-                      />
-                      <span class="slider round" />
-                    </label>
+                  <div class="switch">
+                    <input
+                      type="checkbox"
+                      onClick={this.slideTimeline}
+                      checked={this.state.timeline === "month"}
+                    />
+                    <span class="slider round" />
                   </div>
                 </div>
-                <div className="card-body">
-                  {this.state.timeline == "week" ? (
-                    <WeeklyTracker />
-                  ) : (
-                    <MonthlyTracker />
-                  )}
-                </div>
+              </div>
+              <div className="card-body">
+                {this.state.timeline == "week" ? (
+                  <WeeklyTracker />
+                ) : (
+                  <MonthlyTracker />
+                )}
               </div>
             </div>
           </div>
