@@ -42,6 +42,12 @@ import AVA_GOOSE from "../assets/images/avatar/goose.png";
 import AVA_GORILLA from "../assets/images/avatar/gorilla.png";
 import AVA_HAMSTER from "../assets/images/avatar/hamster.png";
 
+import WEATHER_SUN from "../assets/images/weather/sun.png";
+import WEATHER_SUN_BEHIND from "../assets/images/weather/sun-behind.png";
+import WEATHER_CLOUD from "../assets/images/weather/cloud.png";
+import WEATHER_SNOW from "../assets/images/weather/snowflake.png";
+import WEATHER_UMBRELLA from "../assets/images/weather/umbrella.png";
+
 const EMOJI_LST = [
     ["love",'',IMG_LOVE],
     ["frustrated", '', IMG_FRUSTRATED],
@@ -60,6 +66,14 @@ const EMOJI_LST = [
     ["lost", '', IMG_LOST],
     ["zen out", '', IMG_ZENOUT],
 ];
+
+const WEATHER_LST = [
+    ['Fantastic',WEATHER_SUN],
+    ['Good',WEATHER_SUN_BEHIND],
+    ['So-so',WEATHER_CLOUD],
+    ['Meh',WEATHER_UMBRELLA],
+    ['Not Good',WEATHER_SNOW]
+]
 
 const getEmojiByKey = (key)=>{
     let lst = EMOJI_LST.filter(e=>e[0]==key)
@@ -135,4 +149,5 @@ export {EMOJI_LST,
     RESP_EMOJI,
     AVATAR_IMG,
     getEmojiByKey,
+    WEATHER_LST,
     getRandName}

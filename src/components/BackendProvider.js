@@ -1,6 +1,6 @@
 import axios from "axios";
 const host = "https://delta-trees-327003.wl.r.appspot.com/";
-// const host = 'http://127.0.0.1:8000/'
+//const host = 'http://127.0.0.1:8000/'
 const getUrl = (url) => host + url;
 
 const queryStory = (emotion) => {
@@ -91,6 +91,29 @@ const getUserInfo = () => {
   });
 };
 
+const getUserEmotionHistory = () => {
+  let url = getUrl(`user/weather/`);
+  return axios.get(url, {
+    headers: { Authorization: "JWT " + localStorage.getItem("loginToken") },
+  });
+};
+
+const getToday = ()=>{
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  return date
+}
+const postEmotionHistory = (weather,text,date=getToday()) => {
+  let url = getUrl(`user/weather/`);
+  return axios.post(url,{
+    emotion:weather,
+    text,
+    date
+  }, {
+    headers: { Authorization: "JWT " + localStorage.getItem("loginToken") },
+  });
+};
+
 export {
   queryStory,
   respondStory,
@@ -107,4 +130,6 @@ export {
   getUserInfo,
   logout,
   hasLoggedIn,
+  getUserEmotionHistory,
+  postEmotionHistory
 };
